@@ -1,6 +1,8 @@
 import { UserSearchFormType } from "@/app/types/Forms"
 
-export default function UserSearch({ usernameFilter, setUsernameFilter }: UserSearchFormType) {
+export default function UserSearch({ 
+    usernameFilter, setUsernameFilter, userSearchInProgress, setUserSearchInProgress }
+    : UserSearchFormType) {
 
     // Function to handle user search form submit
     const handleUserSearch = async(event: React.FormEvent): Promise<void> => {
@@ -13,7 +15,7 @@ export default function UserSearch({ usernameFilter, setUsernameFilter }: UserSe
     // Function to get user data by username
     const fetchUserByUsername = async (): Promise<void> => {
         try {
-
+            setUserSearchInProgress(true);
             // Call api request to fetch user data by username
             const res = await fetch(`api/users-graphql/fetch-user-by-username/${usernameFilter}`, {
                 method: "GET",
@@ -25,7 +27,7 @@ export default function UserSearch({ usernameFilter, setUsernameFilter }: UserSe
             // Convert request object to JSON Object
             const resJson = await res.json();
             console.log(resJson);
-
+            setUserSearchInProgress(false);
         } // Handle error
         catch (error: any) {
             console.log(`Error: ${error.message}`);
