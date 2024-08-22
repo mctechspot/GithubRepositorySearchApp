@@ -11,6 +11,11 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
         const requestData = JSON.stringify({
             query: `{
                 repositoryOwner(login: "${username}") {
+                    login
+                    ... on User {
+                        bio,
+                        avatarUrl
+                    }
                     repositories(
                         first: 100
                         ownerAffiliations: OWNER
@@ -32,6 +37,11 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
                             url
                             createdAt
                             updatedAt
+                            languages(first: 100) {
+                                nodes {
+                                    name
+                                }
+                            }
                         }
                     }
                 }

@@ -17,7 +17,7 @@ export default function UserSearch({
         try {
             setUserSearchInProgress(true);
             // Call api request to fetch user data by username
-            const res = await fetch(`api/users-graphql/fetch-user-by-username/${usernameFilter}`, {
+            const res = await fetch(`api/users-graphql/fetch-user-repos/${usernameFilter}`, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json"
