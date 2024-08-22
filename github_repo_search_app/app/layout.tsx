@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={robotoMono.className}>
         <div className={`page-container`}>
           <Header />
-          <div className={`page-content bg-green-main bg-gradient-to-r from-green-main to-blue-main text-green-light p-4`}>
+          <div className={`page-content bg-green-main bg-gradient-to-r from-green-main to-blue-main text-green-light p-10`}>
             {children}
           </div>
           <Footer />
