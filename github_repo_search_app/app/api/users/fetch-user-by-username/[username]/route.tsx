@@ -1,16 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
-import { Octokit, App } from "octokit"
+import { octokit } from "@/app/api/constants"
 
 export async function GET(req: NextRequest, { params }: { params: { username: string } }) {
     try {
 
         // Get username parameter from request
         const username = params.username;
-
-        // Initialise GitHub Oktokit SDK
-        const octokit = new Octokit({
-            auth: process.env.GITHUB_API_ACCESS_TOKEN
-        })
         
         // Call request to get user by username
         const response = await octokit.request(`GET /users/{username}`, {
@@ -24,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
         return NextResponse.json({
             'data': response
         }, { status: response.status })
-        
+
     } catch (error: any) {
         console.log(`Error fetching user: `);
         return NextResponse.json({

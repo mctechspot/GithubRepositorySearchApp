@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
-import { Octokit, App } from "octokit"
+import { octokit } from "@/app/api/constants"
 
 export async function GET(req: NextRequest) {
     try {
-
-        // Initialise GitHub Oktokit SDK
-        const octokit = new Octokit({
-            auth: process.env.GITHUB_API_ACCESS_TOKEN
-        })
 
         // Call request to get users
         const response = await octokit.request('GET /users', {
