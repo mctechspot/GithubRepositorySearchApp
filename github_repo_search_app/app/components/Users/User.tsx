@@ -41,7 +41,7 @@ export default function User({ repositoryOwner }: RepositoryOwnerType) {
                                     <p className={``}>{(repository.languages.nodes.map((language: RepositoryLanguageNodeType, index: number) => {
                                         return language.name
                                     })).join(", ")}</p>
-                                    <Link href={repository.url} className={`flex items-center gap-2`}>
+                                    <Link href={repository.url} target={`_blank`} className={`flex items-center gap-2`}>
                                         <div>
                                             <FaExternalLinkAlt />
                                         </div>
