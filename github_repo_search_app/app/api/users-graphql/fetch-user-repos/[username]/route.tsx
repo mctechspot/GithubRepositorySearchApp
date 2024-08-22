@@ -7,20 +7,38 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
         // Get username parameter from request
         const username = params.username;
 
-        // Build graphql query to fetch a user by username
+        // Build graphql query to fetch repositories by username
         const requestData = JSON.stringify({
             query: `{
-              repositoryOwner(login: "${username}") {
-                    login
-                    ... on User {
-                        bio,
-                        avatarUrl
+                repositoryOwner(login: "${username}") {
+                    repositories(
+                        first: 100
+                        ownerAffiliations: OWNER
+                        privacy: PUBLIC
+                        isFork: false
+                        isLocked: false
+                        orderBy: { field: NAME, direction: ASC }
+                    ) {
+                        totalCount
+                                    
+                        pageInfo {
+                            hasNextPage
+                            endCursor
+                        }
+                                    
+                        nodes {
+                            name
+                            description
+                            url
+                            createdAt
+                            updatedAt
+                        }
                     }
                 }
             }`,
         });
 
-        // Call request to fetch a user by username
+        // Call request to fetch repositories by username
         const response = await fetch(githubGraphqlURL, {
             method: "POST",
             body: requestData,
@@ -38,7 +56,7 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
         return NextResponse.json(responseJson, { status: response.status })
 
     } catch (error: any) {
-        console.log(`Error fetching user by username: ${error.message}`);
+        console.log(`Error fetching repos by username: ${error.message}`);
         return NextResponse.json({
             'error': error.message
         }, { status: 500 })
