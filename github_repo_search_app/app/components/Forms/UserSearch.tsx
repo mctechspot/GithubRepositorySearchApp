@@ -1,7 +1,7 @@
 import { UserSearchFormType } from "@/app/types/Forms"
 
 export default function UserSearch({ 
-    usernameFilter, setUsernameFilter, userSearchInProgress, setUserSearchInProgress }
+    usernameFilter, setUsernameFilter, userSearchInProgress, setUserSearchInProgress, user, setUser }
     : UserSearchFormType) {
 
     // Function to handle user search form submit
@@ -28,6 +28,8 @@ export default function UserSearch({
             const resJson = await res.json();
             console.log(resJson);
             setUserSearchInProgress(false);
+            setUser(resJson);
+            console.log("user: ", user);
         } // Handle error
         catch (error: any) {
             console.log(`Error: ${error.message}`);
