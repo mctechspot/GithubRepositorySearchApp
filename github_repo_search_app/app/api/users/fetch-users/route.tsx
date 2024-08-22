@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
         }, { status: response.status })
 
     } catch (error: any) {
-        console.log(`Error fetching user: `);
+        console.log(`Error fetching list of users: ${error.message}`);
         return NextResponse.json({
             'error': error.message
         }, { status: 500 })

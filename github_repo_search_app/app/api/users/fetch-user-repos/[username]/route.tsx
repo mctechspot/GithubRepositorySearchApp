@@ -21,7 +21,7 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
         }, { status: response.status })
 
     } catch (error: any) {
-        console.log(`Error fetching user: `);
+        console.log(`Error fetching repositories for user: ${error.message}`);
         return NextResponse.json({
             'error': error.message
         }, { status: 500 })

@@ -4,3 +4,4 @@ import { Octokit, App } from "octokit"
 export const octokit = new Octokit({
     auth: process.env.GITHUB_API_ACCESS_TOKEN
 })
+export const githubGraphqlURL: string = `https://api.github.com/graphql`;
