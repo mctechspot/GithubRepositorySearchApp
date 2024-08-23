@@ -7,6 +7,7 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
         // Get username parameter from request
         const username = params.username;
 
+
         // Build graphql query to fetch a user by username
         const requestData = JSON.stringify({
             query: `{

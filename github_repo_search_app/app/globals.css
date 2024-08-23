@@ -30,3 +30,7 @@
 .spin {
   animation: spin 1.5s linear infinite;
 }
+
+.repo-container-height{
+  max-height: calc(100vh - 300px);
+}

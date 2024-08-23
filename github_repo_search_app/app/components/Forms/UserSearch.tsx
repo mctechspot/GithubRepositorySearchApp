@@ -1,3 +1,5 @@
+'use client'
+import { useEffect, useState } from 'react'
 import { UserSearchFormType } from "@/app/types/Forms"
 
 export default function UserSearch({ 
@@ -35,6 +37,10 @@ export default function UserSearch({
             console.log(`Error: ${error.message}`);
         }
     }
+
+    /*useEffect(() => {
+        fetchUserByUsername();
+    }, [usernameFilter])*/
 
     return (
         <>

@@ -22,7 +22,7 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
                         privacy: PUBLIC
                         isFork: false
                         isLocked: false
-                        orderBy: { field: NAME, direction: ASC }
+                        orderBy: { field: UPDATED_AT, direction: DESC }
                     ) {
                         totalCount
                                     

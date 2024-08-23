@@ -4,7 +4,8 @@ import { FaGithub } from "react-icons/fa";
 export default function Header() {
     return (
         <>
-            <div className={`bg-green-main bg-gradient-to-r from-green-main to-blue-main text-green-light p-4`}>
+            <div className={`bg-green-main bg-gradient-to-r from-green-main to-blue-main text-green-light \
+                border-b border-b-solid border-b-green-light p-8`}>
                 <Link href={"/"} className={`block text-center text-green-light text-xl font-bold`}>
                     <div className={`flex justify-center items-center gap-2`}>
                         <div>
