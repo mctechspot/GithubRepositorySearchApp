@@ -8,29 +8,47 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 
 export default function User({ repositoryOwner }: RepositoryOwnerType) {
 
-    const [ displayedRepositories, setDisplayedRepositories ] = useState<any>(repositoryOwner.repositories);
-
-    console.log(displayedRepositories);
+    const [displayedRepositories, setDisplayedRepositories] = useState<any>(repositoryOwner.repositories);
 
     const [repositoryFilter, setRepositoryFilter] = useState<string>("");
-    const  [ userSearchInProgress, setUserSearchInProgress ] = useState<boolean>(false);
-    const handleRepositorySearch = async(event: React.FormEvent):Promise<void> =>{
+    const [userSearchInProgress, setUserSearchInProgress] = useState<boolean>(false);
+    
+    const handleRepositorySearch = async (event: React.FormEvent): Promise<void> => {
         event.preventDefault();
-        console.log()
     };
 
-    //  Function to filter displayed repositories by name
-    const filterRepositoriesByName = (): void =>{
+    //  Function to filter displayed repositories by name or language
+    const filterRepositoriesByName = (): void => {
+
+        // Clean repository filter text, remove whitespace and set to lowercase
+        const cleanRepoFilter: string = repositoryFilter.trim().toLowerCase();
+
+        // Build list of terms from repository filter, splitting the string by commas and removing empty list items
+        const splitSearchList: string[] = cleanRepoFilter.split(",").map((searchItem: string, index: number) => {
+            return searchItem.trim().toLowerCase();
+        }).filter((searchItem: string, index: number) => searchItem !== "");
+
+        // Filter displayed repositories by name and language
         const filteredRepoNodes: RepositoryNodeType[] = repositoryOwner.repositories.nodes.filter((node: RepositoryNodeType, index: number) => {
-            return node.name.trim().toLowerCase().includes(repositoryFilter.trim().toLowerCase())
+            // Function to check if search item language is a substring of langauge list
+            const checkLanguage = (searchItem: string): boolean => {
+                // Build string from repository language list
+                const languages: string[] = node.languages.nodes.map((language: RepositoryLanguageNodeType, index: number) => {
+                    return language.name.trim().toLowerCase();
+                }).join(",").split(",");
+                const languagesUnique: string[] = languages.filter((value, index, array) => array.indexOf(value) === index);
+                const languagesString: string = languagesUnique.join(",");
+                return languagesString.includes(searchItem);
+            }
+            return node.name.trim().toLowerCase().includes(cleanRepoFilter) || splitSearchList.every(checkLanguage);
         });
-        setDisplayedRepositories({...displayedRepositories, nodes: filteredRepoNodes});
+        setDisplayedRepositories({ ...displayedRepositories, nodes: filteredRepoNodes });
     }
 
     useEffect(() => {
         setDisplayedRepositories(repositoryOwner.repositories);
     }, [repositoryOwner])
-    
+
     useEffect(() => {
         filterRepositoriesByName();
     }, [repositoryFilter]);
@@ -49,7 +67,7 @@ export default function User({ repositoryOwner }: RepositoryOwnerType) {
 
             // Convert request object to JSON Object
             const resJson = await res.json();
-            console.log(resJson);
+            //console.log(resJson);
             setUserSearchInProgress(false);
             //setUser(resJson);
             //console.log("user: ", user);
@@ -95,15 +113,15 @@ export default function User({ repositoryOwner }: RepositoryOwnerType) {
                                     </div>
                                     <input
                                         type={`text`}
-                                        placeholder={`Search for a repository by name`}
+                                        placeholder={`Filter by name or programming languages (comma separated)`}
                                         onChange={(event) => setRepositoryFilter(event.target.value)}
                                         className={`bg-transparent placeholder:text-green-light outline-none w-full`}
                                     />
                                 </div>
-                                <button type={`submit`}
+                                {/*<button type={`submit`}
                                     className={`bg-green-light text-blue-main font-black rounded-lg p-4 w-fit`}>
                                     Search
-                                </button>
+                                </button>*/}
                             </div>
 
                         </form>
