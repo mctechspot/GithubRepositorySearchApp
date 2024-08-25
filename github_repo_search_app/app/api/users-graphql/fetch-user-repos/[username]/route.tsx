@@ -54,7 +54,7 @@ export async function GET(req: NextRequest, { params }: { params: { username: st
             body: requestData,
 
             headers: {
-                "Authorization": `Bearer ${process.env.GITHUB_API_ACCESS_TOKEN!}`,
+                "Authorization": `Bearer ${process.env.GITHUB_PERSONAL_ACCESS_TOKEN!}`,
                 "Content-Type": "application/json"
             }
         });
