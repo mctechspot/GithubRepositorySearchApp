@@ -46,6 +46,10 @@ export default function User({ repositoryOwner }: RepositoryOwnerType) {
     }
 
     useEffect(() => {
+        setRepositoryFilter("");
+    }, [repositoryOwner]);
+
+    useEffect(() => {
         setDisplayedRepositories(repositoryOwner.repositories);
     }, [repositoryOwner])
 
@@ -114,6 +118,7 @@ export default function User({ repositoryOwner }: RepositoryOwnerType) {
                                     <input
                                         type={`text`}
                                         placeholder={`Filter by name or programming languages (comma separated)`}
+                                        value={repositoryFilter}
                                         onChange={(event) => setRepositoryFilter(event.target.value)}
                                         className={`bg-transparent placeholder:text-green-light outline-none w-full`}
                                     />
