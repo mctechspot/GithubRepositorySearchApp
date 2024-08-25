@@ -14,3 +14,6 @@ This repository hosts the source code for a web application that allows users to
 - Create a file called .env and add a variable named GITHUB_PERSONAL_ACCESS_TOKEN. Copy and paste the value of the GitHub personal access token you created earlier. Look at the .env.example file to guide you with this step.
 - Install all dependencies with the command ```npm install```
 - Run the application with the command ```npm run dev```
+
+## View Live Application
+This application was deployed with [Vercel](https://vercel.com). View it [here](https://github-repository-search-app-beryl.vercel.app).
