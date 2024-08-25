@@ -1,6 +1,8 @@
 # Github Repository Search App
 This repository hosts the source code for a web application that allows users to search for GitHub users and their repositories. The application is built with Next.js - a full stack React framework with TypeScript on the frontend and Node.js on the backend. The backend utilises the GitHub v4 API which implements GraphQL in order to fetch users and their repositories by username.
 
+![Demo GIF](github_repo_search_app/public/demo.jpg "Demo GIF")
+
 ## Instructions to Run the Application Locally
 - Ensure that [Git](https://git-scm.com/downloads) is installed on your device.
 - Ensure that [Node](https://nodejs.org/en) is installed on your device.
